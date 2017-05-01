@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="app_name">AppAuth Starter</string>
+  <string name="welcome_to_appauth">OpenID AppAuth/Retrofit Startup</string>
+  <string name="make_api_call">Make API Call</string>
+  <string name="make_authorization_request">Make Authorization Request</string>
+  <string name="sign_out">Sign Out</string>
+  <string name="request_complete">API Call Successful.</string>
+  <string name="request_failed">API Call Failed.</string>
+
+  <string name="error_message_session_expired">Auth session expired</string>
+  <string name="error_message_http_error_code_403">Forbidden! You don\'t have permission to access this resource on this api server</string>
+
+  <!-- tools -->
+  <string name="tools_given_name">Some FirstName</string>
+  <string name="tools_family_name">LastName</string>
+  <string name="tools_full_name">Some FirstName LastName</string>
+
+</resources>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        is-multidex="true"
+        jar="C:\myData\Development\AndroidStudioProjects\_OAuth\AndroidAppOpenIDAppAuthodeLabTutorial\appauth-android_codelab_init_keycloak\app\build\intermediates\incremental-classes\debug\instant-run-bootstrap.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="b4ae5947459f3bcf70ccc099f38d5bcdfaede2d8">
+        <dex dex="C:\myData\Development\AndroidStudioProjects\_OAuth\AndroidAppOpenIDAppAuthodeLabTutorial\appauth-android_codelab_init_keycloak\app\build\intermediates\transforms\dex\debug\folders\1000\10000\instant-run-bootstrap_e134317706cc50b3e29b46021613560cf3e87273\classes.dex" />
+    </item>
+
+</items>
