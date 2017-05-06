@@ -476,8 +476,10 @@ public class MainActivity extends AppCompatActivity {
   }
 
   private void updateLabels(UserInfo userInfo) {
-    String imageUrl = "http://lorempixel.com/600/600/people/";
-    //String imageUrl = "http://koakh.com/avatar_300x300.png";
+    String imageUrl = (userInfo.getPicture() != null)
+      ? userInfo.getPicture()
+      :"http://lorempixel.com/600/600/people/";
+
     if (!TextUtils.isEmpty(imageUrl)) {
       Picasso.with(this)
         .load(imageUrl)

@@ -9,7 +9,7 @@
   <string name="request_failed">API Call Failed.</string>
 
   <string name="error_message_session_expired">Auth session expired</string>
-  <string name="error_message_http_error_code_403">Forbidden! You don\'t have permission to access this resource on this api server</string>
+  <string name="error_message_http_error_code_403">Forbidden! You dont have permission to access this resource on this api server</string>
 
   <!-- tools -->
   <string name="tools_given_name">Some FirstName</string>
