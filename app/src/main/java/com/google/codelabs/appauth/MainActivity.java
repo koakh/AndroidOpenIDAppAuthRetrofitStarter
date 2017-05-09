@@ -165,10 +165,11 @@ public class MainActivity extends AppCompatActivity {
     // Authorized
     if (mAuthState != null && mAuthState.isAuthorized()) {
       mAuthorize.setVisibility(View.GONE);
-      //if (mMakeApiCall.getVisibility() == View.GONE) {
-      //  mMakeApiCall.setVisibility(View.VISIBLE);
-      //  mMakeApiCall.setOnClickListener(new MakeApiCallListener(this, mAuthState, new AuthorizationService(this)));
-      //}
+//Todo : CleanComment
+//if (mMakeApiCall.getVisibility() == View.GONE) {
+//  mMakeApiCall.setVisibility(View.VISIBLE);
+//  mMakeApiCall.setOnClickListener(new MakeApiCallListener(this, mAuthState, new AuthorizationService(this)));
+//}
       if (mButtonCall1.getVisibility() == View.GONE) {
         mButtonCall1.setVisibility(View.VISIBLE);
       }
@@ -450,6 +451,7 @@ public class MainActivity extends AppCompatActivity {
     }
   };
 
+  //Todo : CleanComment
   //private class MakeApiCallListener implements Button.OnClickListener {
   //
   //  private final MainActivity mMainActivity;
@@ -552,6 +554,7 @@ public class MainActivity extends AppCompatActivity {
             // negotiation for fresh tokens failed, check ex for more details
             errorMessage = String.format("%s : %s", ex.getLocalizedMessage(), getResources().getString(R.string.error_message_session_expired));
             // Force signOut, Tokens Expired : Update UI
+//Todo : CleanComment
 //mAuthorize.setVisibility(View.VISIBLE);
 //mMakeApiCall.setVisibility(View.GONE);
 //mSignOut.setVisibility(View.GONE);
