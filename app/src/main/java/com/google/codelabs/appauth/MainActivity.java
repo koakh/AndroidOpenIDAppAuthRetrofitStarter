@@ -49,35 +49,30 @@ public class MainActivity extends AppCompatActivity {
 
   private static final String USED_INTENT = "USED_INTENT";
 
-  MainApplication mMainApplication;
-  Context mContext;
+  private MainApplication mMainApplication;
+  private Context mContext;
 
   // State
-  AuthState mAuthState;
+  private AuthState mAuthState;
 
   // AuthUser
-  UserInfo mUserInfo;
+  private UserInfo mUserInfo;
 
   // Views : Buttons
-  AppCompatButton mAuthorize;
-  //AppCompatButton mMakeApiCall;
-  AppCompatButton mSignOut;
-  AppCompatButton mButtonCall1;
-  AppCompatButton mButtonCall2;
+  private AppCompatButton mAuthorize;
+  //private AppCompatButton mMakeApiCall;
+  private AppCompatButton mSignOut;
+  private AppCompatButton mButtonCall1;
+  private AppCompatButton mButtonCall2;
   // Views : TextViews
-  AppCompatTextView mGivenName;
-  AppCompatTextView mFamilyName;
-  AppCompatTextView mFullName;
-  ImageView mProfileView;
+  private AppCompatTextView mGivenName;
+  private AppCompatTextView mFamilyName;
+  private AppCompatTextView mFullName;
+  private ImageView mProfileView;
 
   // Services
-  KeycloakApi mKeycloakApi;
-  BackendApi mBackendApi;
-
-//// Service Calls
-//// Used to pass has parameter to mAuthState.performActionWithFreshTokens
-//private Call<UserInfo> mKeycloakApiUserInfoCall;
-//private Call<User> mBackendApiUserCall;
+  private KeycloakApi mKeycloakApi;
+  private BackendApi mBackendApi;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -113,6 +108,16 @@ public class MainActivity extends AppCompatActivity {
     super.onResume();
     //TODO
     // Call userInfo to check if session is valid
+    if (mKeycloakApi != null && mAuthState != null) {
+      Call<UserInfo> call = mKeycloakApi.getUserInfo(
+        KeycloakApi.REALM,
+        mAuthState.getAccessToken()
+      );
+      performCallAction(new AuthorizationService(mContext), call, keycloakApiUserInfoCallback);
+
+      //Call<User> call = mBackendApi.getUser();
+      //performCallAction(new AuthorizationService(mContext), call, backendApiUserCallback);
+    }
   }
 
   /**
@@ -175,7 +180,7 @@ public class MainActivity extends AppCompatActivity {
       }
       // initApiServices
       initApiServices();
-    // Not Authorized
+      // Not Authorized
     } else {
       mAuthorize.setVisibility(View.VISIBLE);
       //mMakeApiCall.setVisibility(View.GONE);
@@ -187,8 +192,10 @@ public class MainActivity extends AppCompatActivity {
 
   private void initApiServices() {
     // Init Services
-    if (mKeycloakApi == null) mKeycloakApi = ServiceGenerator.createService(KeycloakApi.class, mContext);
-    if (mBackendApi == null) mBackendApi = ServiceGenerator.createService(BackendApi.class, mContext);
+    if (mKeycloakApi == null)
+      mKeycloakApi = ServiceGenerator.createService(KeycloakApi.class, mContext);
+    if (mBackendApi == null)
+      mBackendApi = ServiceGenerator.createService(BackendApi.class, mContext);
   }
 
   /**
@@ -317,6 +324,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onClick(View view) {
       // Used to pass call<T extends BaseModel> has a parameter of mAuthState.performActionWithFreshTokens
+      // Require to always reacreate calls before calling else java.lang.IllegalStateException: Already executed.
       Call<UserInfo> call = mKeycloakApi.getUserInfo(
         KeycloakApi.REALM,
         mAuthState.getAccessToken()
@@ -329,6 +337,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onClick(View view) {
       // Used to pass call<T extends BaseModel> has a parameter of mAuthState.performActionWithFreshTokens
+      // Require to always reacreate calls before calling else java.lang.IllegalStateException: Already executed.
       Call<User> call = mBackendApi.getUser(
       );
       performCallAction(new AuthorizationService(mContext), call, backendApiUserCallback);
@@ -380,10 +389,20 @@ public class MainActivity extends AppCompatActivity {
         // Update UI
         updateLabels(mUserInfo);
       } else {
+        // Detected Session Expired
+        if (response.errorBody().source().toString().contains("User session not")) {
+          String msg = "keycloakApiUserInfoCallback: session expired";
+          Log.d(MainApplication.TAG, msg);
+          Toast.makeText(MainActivity.this, msg, Toast.LENGTH_LONG).show();
+          // Force signOut
+          signOut();
+        }
         // Code: 400 Message: Bad Request
-        String msg = String.format("keycloakApiUserInfoCallback: Code: %s Message: %s", response.code(), response.message());
-        Log.d(MainApplication.TAG, msg);
-        Toast.makeText(MainActivity.this, msg, Toast.LENGTH_LONG).show();
+        else {
+          String msg = String.format("keycloakApiUserInfoCallback: Code: %s Message: %s", response.code(), response.message());
+          Log.d(MainApplication.TAG, msg);
+          Toast.makeText(MainActivity.this, msg, Toast.LENGTH_LONG).show();
+        }
       }
     }
 
@@ -511,9 +530,10 @@ public class MainActivity extends AppCompatActivity {
    * While you can get the tokens directly from the token response, those tokens expire and must be refreshed occasionally.
    * Using AuthState and making your REST API calls inside authState.performActionWithFreshTokens is recommended,
    * as it will automatically ensure that the tokens are fresh (refreshing them when needed) before executing your code.
+   *
    * @param authorizationService
-   * @param call<T extends BaseModel>
-   * @param callback<T extends BaseModel>
+   * @param call<T               extends BaseModel>
+   * @param callback<T           extends BaseModel>
    */
   private <T extends BaseModel> void performCallAction(@NonNull AuthorizationService authorizationService, @NonNull final Call<T> call, @NonNull final Callback<T> callback) {
     // code from the section 'Making API Calls' goes here
