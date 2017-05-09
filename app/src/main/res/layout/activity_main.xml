@@ -35,30 +35,48 @@
     android:textAppearance="?android:textAppearanceMedium"/>
 
   <android.support.v7.widget.AppCompatButton
-    android:id="@+id/authorize"
+    android:id="@+id/buttonAuthorize"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginLeft="@dimen/action_margin"
     android:layout_marginRight="@dimen/action_margin"
-    android:text="@string/make_authorization_request"/>
+    android:text="@string/button_label_authorization_request"/>
+
+<android.support.v7.widget.AppCompatButton
+  android:id="@+id/buttonApiCall"
+  android:layout_width="match_parent"
+  android:layout_height="wrap_content"
+  android:layout_marginLeft="@dimen/action_margin"
+  android:layout_marginRight="@dimen/action_margin"
+  android:text="@string/button_label_api_call"
+  android:visibility="gone"/>
 
   <android.support.v7.widget.AppCompatButton
-    android:id="@+id/makeApiCall"
+    android:id="@+id/buttonSignOut"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginLeft="@dimen/action_margin"
     android:layout_marginRight="@dimen/action_margin"
-    android:text="@string/make_api_call"
+    android:text="@string/button_label_sign_out"
     android:visibility="gone"/>
 
   <android.support.v7.widget.AppCompatButton
-    android:id="@+id/signOut"
+    android:id="@+id/buttonCall1"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginLeft="@dimen/action_margin"
     android:layout_marginRight="@dimen/action_margin"
-    android:text="@string/sign_out"
-    android:visibility="gone"/>
+    android:text="@string/button_label_call1"
+    android:visibility="visible"/>
+
+  <android.support.v7.widget.AppCompatButton
+    android:id="@+id/buttonCall2"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="@dimen/action_margin"
+    android:layout_marginRight="@dimen/action_margin"
+    android:text="@string/button_label_call2"
+    android:visibility="visible"/>
 
   <LinearLayout
     android:layout_width="match_parent"

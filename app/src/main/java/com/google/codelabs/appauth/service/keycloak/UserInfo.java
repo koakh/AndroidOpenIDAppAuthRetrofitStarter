@@ -1,5 +1,6 @@
 package com.google.codelabs.appauth.service.keycloak;
 
+import com.google.codelabs.appauth.service.BaseModel;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.Set;
@@ -14,7 +15,7 @@ import java.util.Set;
 //  "email": "marioammonteiro@gmail.com"
 //}
 
-public class UserInfo {
+public class UserInfo implements BaseModel {
   @SerializedName("sub")
   private String sub;
 

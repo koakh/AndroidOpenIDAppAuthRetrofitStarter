@@ -33,6 +33,7 @@ public interface KeycloakApi {
   @POST("auth/realms/{realm}/protocol/openid-connect/userinfo")
   Call<UserInfo> getUserInfo(
     @Path("realm") String realm,
+    // Must send access_token, not catched by interceptor, required here
     @Field("access_token") String accessToken
   );
 

@@ -2,9 +2,13 @@
 <resources>
   <string name="app_name">AppAuth Starter</string>
   <string name="welcome_to_appauth">OpenID AppAuth/Retrofit Startup</string>
-  <string name="make_api_call">Make API Call</string>
-  <string name="make_authorization_request">Make Authorization Request</string>
-  <string name="sign_out">Sign Out</string>
+
+  <string name="button_label_authorization_request">Make Authorization Request</string>
+<string name="button_label_api_call">Make API Call</string>
+  <string name="button_label_call1">Call #1</string>
+  <string name="button_label_call2">Call #2</string>
+  <string name="button_label_sign_out">Sign Out</string>
+
   <string name="request_complete">API Call Successful.</string>
   <string name="request_failed">API Call Failed.</string>
 
