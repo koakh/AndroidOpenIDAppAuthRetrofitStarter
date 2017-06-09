@@ -31,6 +31,7 @@ import net.openid.appauth.AuthorizationRequest;
 import net.openid.appauth.AuthorizationResponse;
 import net.openid.appauth.AuthorizationService;
 import net.openid.appauth.AuthorizationServiceConfiguration;
+import net.openid.appauth.CodeVerifierUtil;
 import net.openid.appauth.TokenResponse;
 
 import org.json.JSONException;
@@ -305,6 +306,12 @@ public class MainActivity extends AppCompatActivity {
         redirectUri
       );
       builder.setScopes("profile");
+      // Fix for : PKCE verification failed
+      // How can I use the “plain” PKCE code challenge method with AppAuth?
+      // https://stackoverflow.com/questions/35566299/how-can-i-use-the-plain-pkce-code-challenge-method-with-appauth
+      String codeVerifier = CodeVerifierUtil.generateRandomCodeVerifier();
+      builder.setCodeVerifier(codeVerifier, codeVerifier, "plain");
+      // Build AuthorizationRequest
       AuthorizationRequest request = builder.build();
 
       // Perform the Authorization Request
